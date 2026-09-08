@@ -724,7 +724,7 @@ Artificial Intelligence
 
 Este projeto está em desenvolvimento.
 
-Os termos de licença, distribuição e utilização deverão ser definidos de acordo com a estratégia futura do produto.
+Os termos de licença, distribuição e utilização são de propriedade de Raphael De Souza.
 
 ---
 
