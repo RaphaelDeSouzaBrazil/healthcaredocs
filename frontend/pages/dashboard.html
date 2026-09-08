@@ -1,0 +1,1155 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Dashboard | SmartDocs</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      :root {
+        --sidebar-width: 270px;
+
+        --sidebar-bg: #0b1324;
+
+        --sidebar-secondary: #111c32;
+
+        --body-bg: #f4f7fb;
+
+        --primary: #2563eb;
+
+        --text-primary: #172033;
+
+        --text-secondary: #67748a;
+
+        --border: #e8edf4;
+
+        --success: #16a36a;
+
+        --danger: #e04444;
+
+        --warning: #e6a31a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+
+        background: var(--body-bg);
+
+        color: var(--text-primary);
+
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      /*
+        =====================================================
+        SIDEBAR
+        =====================================================
+        */
+
+      .sidebar {
+        position: fixed;
+
+        top: 0;
+
+        left: 0;
+
+        bottom: 0;
+
+        width: var(--sidebar-width);
+
+        background: var(--sidebar-bg);
+
+        color: white;
+
+        overflow-y: auto;
+
+        z-index: 1000;
+
+        display: flex;
+
+        flex-direction: column;
+      }
+
+      .sidebar-header {
+        padding: 26px 24px 20px;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .brand {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+      }
+
+      .brand-icon {
+        width: 42px;
+
+        height: 42px;
+
+        border-radius: 12px;
+
+        background: linear-gradient(135deg, #2563eb, #4f8cff);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 20px;
+
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+      }
+
+      .brand-name {
+        font-size: 19px;
+
+        font-weight: 750;
+
+        letter-spacing: -0.4px;
+      }
+
+      .brand-description {
+        font-size: 10px;
+
+        color: #8fa0ba;
+
+        margin-top: 2px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.8px;
+      }
+
+      .sidebar-nav {
+        padding: 20px 14px;
+
+        flex: 1;
+      }
+
+      .menu-section {
+        font-size: 10px;
+
+        color: #657691;
+
+        font-weight: 700;
+
+        letter-spacing: 1.2px;
+
+        text-transform: uppercase;
+
+        padding: 18px 14px 8px;
+      }
+
+      .nav-item-link {
+        display: flex;
+
+        align-items: center;
+
+        gap: 13px;
+
+        padding: 11px 14px;
+
+        margin: 3px 0;
+
+        color: #aab7ca;
+
+        text-decoration: none;
+
+        border-radius: 10px;
+
+        transition: all 0.2s;
+
+        font-size: 14px;
+      }
+
+      .nav-item-link i {
+        width: 20px;
+
+        font-size: 17px;
+      }
+
+      .nav-item-link:hover {
+        color: white;
+
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .nav-item-link.active {
+        background: linear-gradient(
+          90deg,
+          rgba(37, 99, 235, 0.24),
+          rgba(37, 99, 235, 0.08)
+        );
+
+        color: white;
+      }
+
+      .nav-item-link.active i {
+        color: #75a7ff;
+      }
+
+      .sidebar-footer {
+        margin: 15px;
+
+        padding: 15px;
+
+        border-radius: 12px;
+
+        background: var(--sidebar-secondary);
+      }
+
+      .sidebar-footer small {
+        color: #8190a5;
+      }
+
+      /*
+        =====================================================
+        MAIN
+        =====================================================
+        */
+
+      .main {
+        margin-left: var(--sidebar-width);
+
+        min-height: 100vh;
+      }
+
+      .topbar {
+        height: 78px;
+
+        padding: 0 34px;
+
+        background: rgba(255, 255, 255, 0.92);
+
+        backdrop-filter: blur(15px);
+
+        border-bottom: 1px solid var(--border);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 500;
+      }
+
+      .topbar-title h1 {
+        margin: 0;
+
+        font-size: 20px;
+
+        font-weight: 750;
+
+        letter-spacing: -0.4px;
+      }
+
+      .topbar-title small {
+        color: var(--text-secondary);
+      }
+
+      .topbar-actions {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+      }
+
+      .icon-button {
+        border: 1px solid var(--border);
+
+        background: white;
+
+        border-radius: 10px;
+
+        width: 40px;
+
+        height: 40px;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: #556176;
+      }
+
+      /*
+        =====================================================
+        CONTENT
+        =====================================================
+        */
+
+      .content {
+        padding: 32px 34px 50px;
+
+        max-width: 1700px;
+
+        margin: 0 auto;
+      }
+
+      .page-heading {
+        margin-bottom: 28px;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        gap: 20px;
+
+        align-items: center;
+
+        flex-wrap: wrap;
+      }
+
+      .page-heading h2 {
+        font-size: 26px;
+
+        margin: 0 0 5px;
+
+        font-weight: 760;
+
+        letter-spacing: -0.7px;
+      }
+
+      .page-heading p {
+        margin: 0;
+
+        color: var(--text-secondary);
+      }
+
+      /*
+        =====================================================
+        KPI
+        =====================================================
+        */
+
+      .kpi-card {
+        border: 1px solid var(--border);
+
+        border-radius: 16px;
+
+        background: white;
+
+        padding: 21px;
+
+        min-height: 150px;
+
+        height: 100%;
+
+        box-shadow: 0 4px 18px rgba(20, 32, 60, 0.035);
+      }
+
+      .kpi-header {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        margin-bottom: 18px;
+      }
+
+      .kpi-icon {
+        width: 43px;
+
+        height: 43px;
+
+        border-radius: 12px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 18px;
+      }
+
+      .icon-blue {
+        background: #ebf2ff;
+
+        color: #2463eb;
+      }
+
+      .icon-green {
+        background: #eaf9f2;
+
+        color: #14945f;
+      }
+
+      .icon-red {
+        background: #fff0ef;
+
+        color: #d94242;
+      }
+
+      .icon-purple {
+        background: #f1edff;
+
+        color: #7957da;
+      }
+
+      .icon-orange {
+        background: #fff5e4;
+
+        color: #d98a08;
+      }
+
+      .icon-cyan {
+        background: #e9f8fa;
+
+        color: #168c99;
+      }
+
+      .kpi-label {
+        color: var(--text-secondary);
+
+        font-size: 12px;
+
+        font-weight: 600;
+      }
+
+      .kpi-value {
+        font-size: 30px;
+
+        line-height: 1;
+
+        font-weight: 780;
+
+        margin-bottom: 9px;
+
+        letter-spacing: -1px;
+      }
+
+      .kpi-description {
+        font-size: 11px;
+
+        color: #8792a6;
+      }
+
+      /*
+        =====================================================
+        CARDS
+        =====================================================
+        */
+
+      .dashboard-card {
+        background: white;
+
+        border: 1px solid var(--border);
+
+        border-radius: 16px;
+
+        box-shadow: 0 4px 18px rgba(20, 32, 60, 0.035);
+
+        height: 100%;
+      }
+
+      .dashboard-card-header {
+        padding: 20px 22px 0;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        gap: 16px;
+
+        align-items: flex-start;
+      }
+
+      .dashboard-card-title {
+        font-weight: 720;
+
+        margin: 0;
+
+        font-size: 15px;
+      }
+
+      .dashboard-card-subtitle {
+        font-size: 11px;
+
+        color: var(--text-secondary);
+
+        margin-top: 4px;
+      }
+
+      .dashboard-card-body {
+        padding: 20px 22px 22px;
+      }
+
+      .chart-container {
+        position: relative;
+
+        min-height: 290px;
+      }
+
+      /*
+        =====================================================
+        TABLE
+        =====================================================
+        */
+
+      .processing-table {
+        margin: 0;
+      }
+
+      .processing-table th {
+        font-size: 10px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.5px;
+
+        color: #778397;
+
+        border-bottom: 1px solid var(--border);
+
+        font-weight: 700;
+
+        padding: 13px 16px;
+
+        white-space: nowrap;
+      }
+
+      .processing-table td {
+        font-size: 12px;
+
+        padding: 15px 16px;
+
+        vertical-align: middle;
+
+        border-bottom: 1px solid #f0f3f7;
+      }
+
+      .processing-table tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .patient-name {
+        font-weight: 650;
+
+        color: var(--text-primary);
+      }
+
+      .document-name {
+        font-size: 11px;
+
+        color: var(--text-secondary);
+      }
+
+      /*
+        =====================================================
+        BADGES
+        =====================================================
+        */
+
+      .status-badge {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 6px;
+
+        border-radius: 20px;
+
+        padding: 5px 9px;
+
+        font-size: 10px;
+
+        font-weight: 700;
+      }
+
+      .status-badge::before {
+        content: "";
+
+        width: 6px;
+
+        height: 6px;
+
+        border-radius: 100%;
+
+        background: currentColor;
+      }
+
+      .status-success {
+        background: #eaf8f2;
+
+        color: #14845a;
+      }
+
+      .status-warning {
+        background: #fff6e4;
+
+        color: #b5780c;
+      }
+
+      .status-danger {
+        background: #ffeded;
+
+        color: #c94343;
+      }
+
+      .status-neutral {
+        background: #eff2f6;
+
+        color: #667286;
+      }
+
+      /*
+        =====================================================
+        EMPTY / LOADING
+        =====================================================
+        */
+
+      .loading-block {
+        min-height: 220px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: var(--text-secondary);
+      }
+
+      .empty-state {
+        text-align: center;
+
+        padding: 35px 20px;
+
+        color: var(--text-secondary);
+      }
+
+      .empty-state i {
+        font-size: 32px;
+
+        display: block;
+
+        margin-bottom: 10px;
+
+        color: #a7b2c1;
+      }
+
+      /*
+        =====================================================
+        RESPONSIVE
+        =====================================================
+        */
+
+      .mobile-menu {
+        display: none;
+      }
+
+      @media (max-width: 991px) {
+        .sidebar {
+          transform: translateX(-100%);
+
+          transition: transform 0.25s;
+        }
+
+        .sidebar.open {
+          transform: translateX(0);
+        }
+
+        .main {
+          margin-left: 0;
+        }
+
+        .mobile-menu {
+          display: inline-flex;
+        }
+
+        .topbar {
+          padding: 0 18px;
+        }
+
+        .content {
+          padding: 24px 18px 40px;
+        }
+      }
+
+      @media (max-width: 575px) {
+        .page-heading h2 {
+          font-size: 22px;
+        }
+
+        .kpi-value {
+          font-size: 26px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =====================================================
+SIDEBAR
+===================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon">
+            <i class="bi bi-file-earmark-medical"></i>
+          </div>
+
+          <div>
+            <div class="brand-name">SmartDocs</div>
+
+            <div class="brand-description">Healthcare Intelligence</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="menu-section">Principal</div>
+
+        <a href="./dashboard.html" class="nav-item-link active">
+          <i class="bi bi-grid"></i>
+
+          Dashboard
+        </a>
+
+        <a href="./upload.html" class="nav-item-link">
+          <i class="bi bi-cloud-arrow-up"></i>
+
+          Novo processamento
+        </a>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-files"></i>
+
+          Documentos
+        </a>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-diagram-3"></i>
+
+          Processos
+        </a>
+
+        <div class="menu-section">Saúde</div>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-clipboard2-pulse"></i>
+
+          Processos clínicos
+        </a>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-heart-pulse"></i>
+
+          Atendimentos
+        </a>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-people"></i>
+
+          Pacientes
+        </a>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-shield-check"></i>
+
+          Auditoria clínica
+        </a>
+
+        <div class="menu-section">Administração</div>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-bar-chart"></i>
+
+          Relatórios
+        </a>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-person-gear"></i>
+
+          Usuários
+        </a>
+
+        <a href="#" class="nav-item-link">
+          <i class="bi bi-gear"></i>
+
+          Configurações
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <small> SmartDocs API </small>
+
+        <div class="mt-1" style="font-size: 12px; font-weight: 650">
+          <span
+            style="
+              display: inline-block;
+              width: 7px;
+              height: 7px;
+              border-radius: 100%;
+              background: #21c987;
+              margin-right: 6px;
+            "
+          ></span>
+
+          Sistema conectado
+        </div>
+      </div>
+    </aside>
+
+    <!-- =====================================================
+MAIN
+===================================================== -->
+
+    <main class="main">
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="icon-button mobile-menu" id="btnMobileMenu">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div class="topbar-title">
+            <h1>Dashboard</h1>
+
+            <small> Monitoramento documental e clínico </small>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button
+            class="icon-button"
+            id="btnRefresh"
+            title="Atualizar dashboard"
+          >
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
+
+          <a href="./upload.html" class="btn btn-primary btn-sm px-3">
+            <i class="bi bi-plus-lg me-1"></i>
+
+            Novo processamento
+          </a>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+
+      <section class="content">
+        <div class="page-heading">
+          <div>
+            <h2>Visão geral</h2>
+
+            <p>Analytics dos documentos processados pelo SmartDocs.</p>
+          </div>
+
+          <div class="small text-secondary" id="ultimaAtualizacao">
+            Carregando dados...
+          </div>
+        </div>
+
+        <!-- =================================================
+        KPIS
+        ================================================= -->
+
+        <div class="row g-3 mb-4">
+          <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-label">Processamentos</div>
+
+                <div class="kpi-icon icon-blue">
+                  <i class="bi bi-diagram-3"></i>
+                </div>
+              </div>
+
+              <div class="kpi-value" id="kpiProcessamentos">-</div>
+
+              <div class="kpi-description">Processos armazenados</div>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-label">Documentos</div>
+
+                <div class="kpi-icon icon-purple">
+                  <i class="bi bi-files"></i>
+                </div>
+              </div>
+
+              <div class="kpi-value" id="kpiDocumentos">-</div>
+
+              <div class="kpi-description">Documentos analisados</div>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-label">Exames</div>
+
+                <div class="kpi-icon icon-cyan">
+                  <i class="bi bi-activity"></i>
+                </div>
+              </div>
+
+              <div class="kpi-value" id="kpiExames">-</div>
+
+              <div class="kpi-description">Resultados extraídos</div>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-label">Dentro referência</div>
+
+                <div class="kpi-icon icon-green">
+                  <i class="bi bi-check2-circle"></i>
+                </div>
+              </div>
+
+              <div class="kpi-value" id="kpiNormais">-</div>
+
+              <div class="kpi-description">Comparação documental</div>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-label">Fora referência</div>
+
+                <div class="kpi-icon icon-red">
+                  <i class="bi bi-exclamation-triangle"></i>
+                </div>
+              </div>
+
+              <div class="kpi-value" id="kpiAlterados">-</div>
+
+              <div class="kpi-description">Requerem atenção documental</div>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <div class="kpi-label">Confiança média</div>
+
+                <div class="kpi-icon icon-orange">
+                  <i class="bi bi-stars"></i>
+                </div>
+              </div>
+
+              <div class="kpi-value" id="kpiConfianca">-</div>
+
+              <div class="kpi-description">OCR + classificação</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        CHARTS ROW 1
+        ================================================= -->
+
+        <div class="row g-4 mb-4">
+          <div class="col-xl-8">
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <div>
+                  <h3 class="dashboard-card-title">Volume de processamentos</h3>
+
+                  <div class="dashboard-card-subtitle">
+                    Documentos processados ao longo do tempo
+                  </div>
+                </div>
+              </div>
+
+              <div class="dashboard-card-body">
+                <div class="chart-container">
+                  <canvas id="chartVolume"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <div>
+                  <h3 class="dashboard-card-title">Status dos resultados</h3>
+
+                  <div class="dashboard-card-subtitle">
+                    Comparação com referências do documento
+                  </div>
+                </div>
+              </div>
+
+              <div class="dashboard-card-body">
+                <div class="chart-container">
+                  <canvas id="chartStatus"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        CHARTS ROW 2
+        ================================================= -->
+
+        <div class="row g-4 mb-4">
+          <div class="col-xl-7">
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <div>
+                  <h3 class="dashboard-card-title">Exames mais processados</h3>
+
+                  <div class="dashboard-card-subtitle">
+                    Frequência dos resultados laboratoriais extraídos
+                  </div>
+                </div>
+              </div>
+
+              <div class="dashboard-card-body">
+                <div class="chart-container">
+                  <canvas id="chartExames"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-5">
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <div>
+                  <h3 class="dashboard-card-title">Tipos documentais</h3>
+
+                  <div class="dashboard-card-subtitle">
+                    Documentos identificados pelo SmartDocs
+                  </div>
+                </div>
+              </div>
+
+              <div class="dashboard-card-body">
+                <div class="chart-container">
+                  <canvas id="chartDocumentos"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+        RECENT PROCESSING
+        ================================================= -->
+
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <div>
+              <h3 class="dashboard-card-title">Processamentos recentes</h3>
+
+              <div class="dashboard-card-subtitle">
+                Últimos documentos analisados pelo sistema
+              </div>
+            </div>
+
+            <a href="./upload.html" class="btn btn-light btn-sm border">
+              Novo upload
+            </a>
+          </div>
+
+          <div class="dashboard-card-body p-0 mt-3">
+            <div class="table-responsive">
+              <table class="table processing-table">
+                <thead>
+                  <tr>
+                    <th>Paciente</th>
+
+                    <th>Processo</th>
+
+                    <th>Documento</th>
+
+                    <th>Exames</th>
+
+                    <th>Confiança</th>
+
+                    <th>Status</th>
+
+                    <th>Data</th>
+                  </tr>
+                </thead>
+
+                <tbody id="recentesBody">
+                  <tr>
+                    <td colspan="7">
+                      <div class="loading-block">
+                        <div
+                          class="spinner-border spinner-border-sm me-2"
+                        ></div>
+
+                        Carregando processamentos...
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-light border mt-4 small text-secondary">
+          <i class="bi bi-info-circle me-1"></i>
+
+          Os indicadores de referência exibidos pelo SmartDocs representam
+          comparações automatizadas com informações presentes nos documentos
+          processados e não constituem diagnóstico médico.
+        </div>
+      </section>
+    </main>
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+    <!-- Dashboard JS -->
+
+    <script src="../js/dashboard.js"></script>
+  </body>
+</html>

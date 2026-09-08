@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "nome": "Transferência de Veículo",
+    "descricao": "Transferência de propriedade de veículo.",
+    "documentos": [
+      {
+        "nome": "RG",
+        "obrigatorio": true
+      },
+      {
+        "nome": "CPF",
+        "obrigatorio": true
+      },
+      {
+        "nome": "CRLV",
+        "obrigatorio": true
+      },
+      {
+        "nome": "Comprovante de Residência",
+        "obrigatorio": true
+      },
+      {
+        "nome": "Procuração",
+        "obrigatorio": false
+      }
+    ]
+  },
+
+  {
+    "id": 2,
+    "nome": "Primeira Habilitação",
+    "descricao": "Solicitação da primeira CNH.",
+    "documentos": [
+      {
+        "nome": "RG",
+        "obrigatorio": true
+      },
+      {
+        "nome": "CPF",
+        "obrigatorio": true
+      },
+      {
+        "nome": "Exame Médico",
+        "obrigatorio": true
+      },
+      {
+        "nome": "Comprovante de Residência",
+        "obrigatorio": true
+      }
+    ]
+  }
+]

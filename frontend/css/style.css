@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+}
+
+.sidebar {
+  height: 100vh;
+  background: #111827;
+  color: white;
+  padding: 30px;
+}
+
+.sidebar h2 {
+  margin-bottom: 40px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+}
+
+.card h3 {
+  font-size: 22px;
+}
