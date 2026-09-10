@@ -2,7 +2,7 @@
 
 ### Healthcare Document Intelligence
 
-O **SmartDocs** é uma plataforma de inteligência documental voltada para o setor de saúde, criada para automatizar a leitura, classificação, estruturação e análise documental de arquivos médicos, clínicos, hospitalares e administrativos.
+O **HealthcareDocs** é uma plataforma de inteligência documental voltada para o setor de saúde, criada para automatizar a leitura, classificação, estruturação e análise documental de arquivos médicos, clínicos, hospitalares e administrativos.
 
 A aplicação utiliza **OCR, processamento de documentos e extração estruturada de dados** para transformar arquivos como PDFs e imagens em informações organizadas e utilizáveis por sistemas, dashboards e processos de auditoria.
 
